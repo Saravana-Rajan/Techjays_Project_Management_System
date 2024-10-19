@@ -1,0 +1,71 @@
+{% extends 'management/base.html' %}
+
+{% block title %}Project Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Project: {{ project.name }}</h4>
+                </div>
+                <div class="card-body">
+                    {% for month_year, data in project_data.items %}
+                        <h5 class="text-center my-4">{{ month_year }}</h5>
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Resource Name</th>
+                                    <th>Allocation</th>
+                                    <th>Actual Budget</th>
+                                    <th>Budget</th>
+                                    <th>Profit Rating</th>
+                                    <th>PnL %</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for resource in data.resources %}
+                                    <tr>
+                                        <td>{{ resource.resource_name }}</td>
+                                        <td>{{ resource.allocation }}</td>
+                                        <td>{{ data.actual_budget }}</td>
+                                        <td>{{ data.budget }}</td>
+                                        <td>{{ data.profit_rating }}</td>
+                                        <td>{{ data.pnl_percentage|floatformat:2 }}%</td>
+                                        <td>
+                                            <a href="{% url 'edit_resource' resource.id %}" class="btn btn-warning">Edit</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <h5 class="mt-4">Comments</h5>
+                        <ul class="list-group">
+                            {% for comment in data.comments %}
+                                <li class="list-group-item">
+                                    {{ comment.comment_text }} - 
+                                    <strong>{{ comment.created_by.username }}</strong> 
+                                    <em>({{ comment.created_at }})</em>
+                                </li>
+                            {% empty %}
+                                <li class="list-group-item text-muted">No comments for this period.</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+                <div class="card-footer text-right">
+                    <a href="{% url 'manager_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap and jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}

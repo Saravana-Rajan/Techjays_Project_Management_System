@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            padding-top: 56px; /* To avoid content being hidden behind the navbar */
+            background: linear-gradient(to right, #2c3e50, #bdc3c7); /* Softer gradient background */
+            color: white;
+        }
+
+        /* Navbar Styling */
+        .navbar-custom {
+            background-color: #34495e; /* Dark Blue-Grey */
+        }
+        .navbar-custom .navbar-brand {
+            color: #ecf0f1; /* Off-white brand text */
+        }
+        .navbar-custom .navbar-nav .nav-link {
+            color: #ecf0f1; /* Off-white link text */
+        }
+        .navbar-custom .navbar-nav .nav-link:hover {
+            color: #f39c12; /* Highlight text color on hover */
+        }
+
+        /* General Content Styling */
+        .content-wrapper {
+            padding: 30px;
+            background-color: #ecf0f1; /* Light background for content */
+            color: #2c3e50; /* Dark text for better readability */
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: #ffffff; /* White card background */
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button Styling */
+        .btn-custom {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+        .btn-custom:hover {
+            background-color: #e67e22;
+        }
+
+        /* Footer Styling (Optional) */
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 20px;
+                margin-top: 10px;
+            }
+        }
+    </style>
+    <title>{% block title %}TECHJAYS PROJECT MANAGEMENT{% endblock %}</title>
+</head>
+<body>
+
+    <!-- Conditionally include the navbar only if 'show_navbar' is True -->
+    {% if show_navbar %}
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'manager_dashboard' %}">TECHJAYS PROJECT MANAGEMENT</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'manager_dashboard' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="container content-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

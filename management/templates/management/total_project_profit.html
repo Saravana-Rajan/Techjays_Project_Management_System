@@ -1,0 +1,129 @@
+{% extends 'management/base.html' %}
+
+{% block title %}Total Project Profit{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #2c3e50, #4ca1af); /* Cool gradient background */
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 90%; /* Extend the width of the table */
+            background-color: rgba(255, 255, 255, 0.95); /* Light semi-transparent background */
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            color: #2c3e50;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        table {
+            width: 100%; /* Extend the width of the table */
+            border-collapse: separate;
+            border-spacing: 0 10px; /* Add spacing between rows */
+        }
+
+        table thead th {
+            background-color: #1abc9c; /* Accent color for headers */
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        table tbody tr {
+            background-color: #ecf0f1; /* Subtle background for rows */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to rows */
+        }
+
+        table tbody td {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+
+        .btn-secondary {
+            background-color: #34495e;
+            border-color: #34495e;
+            color: #ecf0f1;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2c3e50;
+            transform: translateY(-3px);
+        }
+
+        .no-data {
+            background-color: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Total Project Profit</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Month/Year</th>
+                    <th>Profit Rating</th>
+                    <th>PnL %</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in project_profit_data %}
+                    <tr>
+                        <td>{{ data.project_name }}</td>
+                        <td>{{ data.month_year }}</td>
+                        <td>{{ data.profit_rating }}</td>
+                        <td>{{ data.pnl_percentage|floatformat:2 }}%</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="no-data text-center">No profit data available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'manager_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-header h4 {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+
+        .btn-custom {
+            background-color: #ffffff;
+            border: none;
+            color: #6a11cb;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        .btn-custom:hover {
+            background-color: #6a11cb;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .fa-icon {
+            margin-right: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <title>Welcome</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-header bg-transparent">
+                        <h4>Techjays Project Management System</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="lead">Manage your projects efficiently and collaborate with your team!</p>
+                        <a href="{% url 'login' %}" class="btn btn-custom">
+                            <i class="fas fa-sign-in-alt fa-icon"></i>Login
+                        </a>
+                        <a href="{% url 'register' %}" class="btn btn-custom">
+                            <i class="fas fa-user-plus fa-icon"></i>Register
+                        </a>
+                    </div>
+                    <div class="footer">
+                        <p>Need help? <a href="#">Contact Support</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
