@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Project, Employee, ProjectComment, ProjectResource, Comment, calculate_profit_rating
-from .forms import (CustomUserCreationForm, EmployeeForm, MonthYearForm, 
-                    ProjectForm, ResourceAllocationForm, CommentForm, EmployeeAssignmentForm)
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from datetime import datetime
-from .forms import ResourceAllocationForm
+from decimal import Decimal
+from .models import Project, Employee, ProjectComment, ProjectResource, ProjectBudget, calculate_profit_rating
+from .forms import (CustomUserCreationForm, EmployeeForm, MonthYearForm, ProjectForm, 
+                    ResourceAllocationForm, CommentForm, EmployeeAssignmentForm, BudgetForm, ProjectBudgetForm)
+from .models import Project, ProjectComment, Comment
+from .forms import CommentForm
 
 # Home Page View
 def home(request):
@@ -63,20 +65,7 @@ def manager_dashboard(request):
     return render(request, 'management/manager_dashboard.html', {'projects': projects})
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Project
-from .forms import CommentForm
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import Project, ProjectComment  # Make sure you have the correct model import
 
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import Project, ProjectComment
-from .forms import CommentForm  # Assuming you have a CommentForm
 
 @login_required
 def add_comment(request, project_id):
@@ -106,13 +95,7 @@ def add_comment(request, project_id):
     return render(request, 'management/add_comment.html', {'project': project, 'years': years})
 
 
-from datetime import datetime
 
-from django.shortcuts import render, get_object_or_404
-from .models import Project, ProjectResource, ProjectBudget
-from django.contrib.auth.decorators import login_required
-
-from decimal import Decimal
 @login_required
 def project_details(request, project_id):
     project = get_object_or_404(Project, id=project_id)
@@ -169,10 +152,7 @@ def project_details(request, project_id):
     return render(request, 'management/project_details.html', {'project': project, 'project_data': project_data})
 
 # Create a new project (Manager Only)
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .forms import ProjectForm
-from .models import Project
+
 
 @login_required
 def create_project(request):
@@ -223,24 +203,6 @@ def assign_resources(request, project_id):
         'resources': resources
     })
 
-# Team Lead Dashboard: List all projects for the team lead
-@login_required
-def team_lead_dashboard(request):
-    projects = Project.objects.all()  # Fetch all projects
-    project_data = []
-
-    for project in projects:
-        resources = ProjectResource.objects.filter(project=project)
-        for resource in resources:
-            month_wise_data = {
-                'project_name': project.name,
-                'resource_name': resource.employee.user.username,
-                'month_year': "September 2024",  # Example placeholder, replace with dynamic logic
-                'resource_ratio': resource.allocation_ratio,
-            }
-            project_data.append(month_wise_data)
-
-    return render(request, 'management/team_lead_dashboard.html', {'project_data': project_data})
 
 @login_required
 def assign_employee(request, project_id):
@@ -342,10 +304,7 @@ def project_comments(request, project_id):
 
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Project, ProjectResource
-from .forms import ResourceAllocationForm  # Correct form
+ # Correct form
 @login_required
 def allocate_resources(request, project_id):
     project = Project.objects.get(id=project_id)
@@ -410,9 +369,7 @@ def update_actual_resources(request, project_id):
 
 
 
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
-from .models import Project
+
 
 @login_required
 def delete_project(request, project_id):
@@ -424,15 +381,7 @@ def delete_project(request, project_id):
     return render(request, 'management/delete_project_confirm.html', {'project': project})
 
 
-from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib import messages
-from .models import ProjectResource  # Make sure to import the ProjectResource model
-  # Make sure to import your ResourceForm
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
-from .models import ProjectResource
-from .forms import ResourceAllocationForm  # Correct form
 
 @login_required
 def edit_resource(request, resource_id):
@@ -450,10 +399,6 @@ def edit_resource(request, resource_id):
     return render(request, 'management/edit_resource.html', {'form': form, 'resource': resource})
 
 
-
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import BudgetForm
-from .models import Project, ProjectResource
 
 @login_required
 def budget_view(request, project_id):
@@ -480,9 +425,7 @@ def budget_view(request, project_id):
     return render(request, 'management/budget_form.html', {'form': form, 'project': project})
 
 
-from django.shortcuts import render, redirect
-from .forms import ProjectBudgetForm
-from .models import Project
+
 
 @login_required
 def add_budget(request, project_id):
@@ -501,10 +444,7 @@ def add_budget(request, project_id):
     return render(request, 'management/add_budget.html', {'form': form, 'project': project})
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .forms import BudgetForm
-from .models import Project, ProjectBudget
+
 
 @login_required
 def budget_view(request, project_id):

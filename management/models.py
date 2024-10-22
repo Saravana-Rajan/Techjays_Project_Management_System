@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 from datetime import datetime
+from decimal import Decimal
 
 # Employee model: Represents the employee of the organization
 class Employee(models.Model):
@@ -12,11 +13,6 @@ class Employee(models.Model):
         return self.user.username
 
 
-from django.db import models
-from django.contrib.auth.models import User
-
-
-from .models import Employee
 
 # Project model: Represents the project created by the manager
 class Project(models.Model):
@@ -44,10 +40,7 @@ class ProjectBudget(models.Model):
 
 
 # ProjectResource model: Represents the resources allocated to a project (employee + ratio)
-from django.db import models
-from django.contrib.auth.models import User
 
-from django.db import models
 
 class ProjectResource(models.Model):
     MONTH_CHOICES = [
@@ -68,8 +61,7 @@ class ProjectResource(models.Model):
 
 # Comment model: Represents comments added by team lead or manager to a project
 
-from django.db import models
-from django.contrib.auth.models import User
+
 
 class Comment(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -91,7 +83,7 @@ class ProjectComment(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-from decimal import Decimal
+
 
 def calculate_profit_rating(budget, actual_budget):
     # Ensure both inputs are Decimals

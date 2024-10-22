@@ -16,7 +16,7 @@ urlpatterns = [
 
     # Dashboard for Manager and Team Lead
     path('manager_dashboard/', views.manager_dashboard, name='manager_dashboard'),
-    path('team_lead_dashboard/', views.team_lead_dashboard, name='team_lead_dashboard'),
+    
 
     # Project Management (Create, Edit, Allocate Resources)
     path('create_project/', views.create_project, name='create_project'),
